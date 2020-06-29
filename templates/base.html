@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body{
+        margin:0px; auto;
+        }
+
+        #content{
+        margin:0px auto;
+        text-align:center;
+        max-width:5in;
+        }
+
+        table{
+        margin:0px auto;
+        border-collapse: collapse;
+        width:100%;
+        }
+
+        table, th, td{
+        border: 1px solid black;
+        padding:10px;
+        }
+
+        input{
+        width:80%;
+        }
+
+        .error{
+        color:red;
+        }
+    </style>
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

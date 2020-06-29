@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Tasks
+{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('logout') }}"><i>logout</i></a>
+<h3>Welcome {{ username }}</h3>
+<table>
+    <tr>
+        <th>Task</th>
+        <th></th>
+    </tr>
+    <tr>
+        <form action="{{ url_for('tasks') }}" method="POST" >
+            <td><input type="text" name="new_task"></td>
+            <td><input type="submit" name="submit_button" value="Add Task"></td>
+        </form>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <form action="{{ url_for('tasks') }}" method="POST" >
+            <td>{{task[2]}}</td>
+            <td>
+                <input style="display:none;" name="task_id" type="text" value="{{task[0]}}">
+                <input type="submit" name="submit_button" value="Delete">
+            </td>
+        </form>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

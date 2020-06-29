@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+Tasks
+{% endblock %}
+
+{% block content %}
+<h1>Login:</h1>
+<p>Need an account? <i><a href="{{ url_for('register') }}">register</a></i></p>
+<p>Done? <i><a href="{{ url_for('delete') }}">delete account</a></i></p>
+<form action="{{ url_for('login') }}" method="POST">
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" name="username"></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Login"></td>
+        </tr>
+    </table>
+</form>
+<p class="error">{{error}}</p>
+{% endblock %}
