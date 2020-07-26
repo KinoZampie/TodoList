@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, request, session, g
 
-import pymysql.cursors
+import sqlite3
 
 app = Flask(__name__)
 app.secret_key = "stay secret to keep my todo items safe"
@@ -12,10 +12,7 @@ def before_request():
     if 'user' in session:
         g.user = session['user']
 
-    g.db = pymysql.connect(host="localhost",
-                         user="root",
-                         password="Tycon*()123@",
-                         db="assignments_tracker_db")
+    g.db = sqlite3.connect("assignments_tracker.db")
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -35,8 +32,8 @@ def tasks():
             cursor.close()
             return redirect(url_for("tasks"))
     cursor.execute("SELECT * FROM tasks WHERE task_user = '{}'".format(g.user))
-    cursor.close()
     task_data = cursor.fetchall()
+    cursor.close()
     return render_template("tasks.html", username=g.user, tasks=reversed(task_data))
 
 
@@ -110,4 +107,4 @@ def delete():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
